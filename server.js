@@ -1,11 +1,40 @@
 import express from 'express';
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-const server = express();
+import { ApolloServer, gql } from 'apollo-server-express';
+import typeDefs from './schema.js';
+import resolvers from './resolvers.js';
 
-server.get('/', (req, res) => {
-    res.send('<html> <head> </head> <body> <h1> Hello Archit</h1></body></html>');
-} );
+const app = express();
 
-server.listen(4000, () => {
-    console.log('listening on port 4000');
-});
+const PORT = 4000;
+
+// const typeDefs = gql`
+//   type Query {
+//     hello: String
+//   }
+// `;
+
+// const typeDefs = `type Author {
+//     age: Int
+//     name: String
+//     Books: [ String ]
+// }
+
+// type Query {
+//     author: [ Author ]
+// }
+
+// `;
+
+// const resolvers = {
+//   Query: {
+//     hello: () => 'Hello world!!'
+//   },
+// };
+
+const server = new ApolloServer({ typeDefs, resolvers });
+server.applyMiddleware({ app });
+
+
+app.listen({ port: PORT }, () =>
+  console.log(` Server ready at http://localhost:4000${server.graphqlPath}`)
+)
