@@ -2,8 +2,11 @@ import express from 'express';
 import { ApolloServer, gql } from 'apollo-server-express';
 import typeDefs from './schema.js';
 import resolvers from './resolvers.js';
+import mongoose from 'mongoose';
 
 const PORT = 4000;
+
+mongoose.connect('mongodb://localhost/graphqlTutorial');
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
