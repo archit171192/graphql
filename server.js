@@ -3,35 +3,11 @@ import { ApolloServer, gql } from 'apollo-server-express';
 import typeDefs from './schema.js';
 import resolvers from './resolvers.js';
 
-const app = express();
-
 const PORT = 4000;
 
-// const typeDefs = gql`
-//   type Query {
-//     hello: String
-//   }
-// `;
-
-// const typeDefs = `type Author {
-//     age: Int
-//     name: String
-//     Books: [ String ]
-// }
-
-// type Query {
-//     author: [ Author ]
-// }
-
-// `;
-
-// const resolvers = {
-//   Query: {
-//     hello: () => 'Hello world!!'
-//   },
-// };
-
 const server = new ApolloServer({ typeDefs, resolvers });
+
+const app = express();
 server.applyMiddleware({ app });
 
 
