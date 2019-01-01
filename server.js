@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 
 const PORT = 4000;
 
-mongoose.connect('mongodb://localhost/graphqlTutorial');
+mongoose.connect('mongodb://localhost/graphqlTutorial', { useNewUrlParser: true });
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
